@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="split-auth-container">
+    <div class="auth-sidebar">
+        <div class="glass-form">
+            <h2>Login to Your Account</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label>Email</label>
+                    {{ form.username }}
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    {{ form.password }}
+                </div>
+                <div class="options">
+                    <label><input type="checkbox"> Remember me?</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-btn">LOG IN</button>
+            </form>
+            <div class="social-icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-linkedin"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-content">
+        <h1>THE GOAL OF LIFE IS LIVING IN AGREEMENT WITH NATURE.</h1>
+    </div>
+</div>
+{% endblock %}

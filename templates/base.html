@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kerala Tourism</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <div style="color:white; font-size: 1.5rem;">KERALA.</div>
+    <nav>
+        <a href="/">Home</a>
+        {% if user.is_authenticated %}
+            <span>Hello, {{ user.username }}</span>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}<button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+</header>
+
+{% block content %}{% endblock %}
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

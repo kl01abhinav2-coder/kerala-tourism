@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .auth-wrapper {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #1a1a1a; /* Dark background to match theme */
+    }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 20px;
+        width: 400px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    .form-item {
+        text-align: left;
+        margin-bottom: 15px;
+    }
+    .form-item label {
+        display: block;
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+        color: #ccc;
+    }
+    .form-item input {
+        width: 100%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        color: white;
+        box-sizing: border-box;
+    }
+    .btn-signup {
+        background: white;
+        color: black;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+    .btn-signup:hover {
+        background: #ddd;
+    }
+</style>
+
+<div class="auth-wrapper">
+    <div class="glass-card">
+        <h2>Join the Journey</h2>
+        <p>Create an account to explore Kerala</p>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-item">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <small style="color: #ff4d4d;">{{ field.errors.0 }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-item">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" placeholder="example@gmail.com" required>
+            </div>
+            
+            <button type="submit" class="btn-signup">Sign Up</button>
+        </form>
+        
+        <p style="margin-top: 20px; font-size: 0.9rem;">
+            Already a member? <a href="{% url 'login' %}" style="color: #00d2ff; text-decoration: none;">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

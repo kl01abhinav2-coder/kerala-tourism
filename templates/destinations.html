@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="text-align:center; padding: 40px 0;">
+    <h1>Explore Destinations</h1>
+    <p>Handpicked spots for your next adventure</p>
+</div>
+
+<div class="cards">
+    {% for dest in destinations %}
+    <div class="card">
+        <img src="{{ dest.image_url }}" alt="{{ dest.name }}">
+        <div class="card-content">
+            <h3>{{ dest.name }}</h3>
+            <p>{{ dest.description }}</p>
+            <p><strong>Starts from ₹{{ dest.price_per_person }}</strong></p>
+            <a href="{% url 'booking' %}" class="btn" style="padding: 5px 15px; font-size: 0.8rem;">Book This</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No destinations found. Please add some in the Admin panel!</p>
+    {% endfor %}
+</div>
+{% endblock %}
